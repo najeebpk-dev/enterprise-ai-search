@@ -10,3 +10,13 @@ This project demonstrates an **enterprise-grade document search system** built u
 ---
 
 ## 📁 Project Structure
+
+data/ # PDF documents to ingest
+src/ # Python modules
+ingest.py # Ingest PDFs
+query.py # Search interface
+.env.example # Environment variable template
+.gitignore # Ignore files
+requirements.txt # Python dependencies
+README.md # Documentation
+

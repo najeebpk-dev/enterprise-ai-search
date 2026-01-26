@@ -1,0 +1,27 @@
+name: Update README badges
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly
+
+jobs:
+  update-badges:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Generate coverage badge
+        run: |
+          pip install pytest pytest-cov coverage-badge
+          pytest --cov=src --cov-report=term
+          coverage-badge -o coverage.svg -f
+      
+      - name: Commit badge
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add coverage.svg || true
+          git commit -m "Update coverage badge" || true
+          git push || true

@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  enterprise-search:
+    build: .
+    image: enterprise-ai-search:latest
+    container_name: enterprise-ai-search
+    env_file:
+      - .env
+    volumes:
+      - ./data/documents:/app/data/documents:ro
+    stdin_open: true
+    tty: true
+    command: python src/query.py
+
+# Usage:
+#
+# 1. Build and start:
+#    docker-compose up --build
+#
+# 2. Run ingestion:
+#    docker-compose run enterprise-search python src/ingest.py
+#
+# 3. Run query interface:
+#    docker-compose run enterprise-search python src/query.py

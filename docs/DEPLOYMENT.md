@@ -66,22 +66,23 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
     --resource-group $RESOURCE_GROUP \
     --query "key1" -o tsv)
 
-# Deploy models
+az cognitiveservices account deployment create \
+# Deploy models (update names/versions to match your deployments)
 az cognitiveservices account deployment create \
     --name $OPENAI_SERVICE \
     --resource-group $RESOURCE_GROUP \
-    --deployment-name text-embedding-ada-002 \
-    --model-name text-embedding-ada-002 \
-    --model-version "2" \
+    --deployment-name text-embedding-3-small \
+    --model-name text-embedding-3-small \
+    --model-version "1" \
     --model-format OpenAI \
     --scale-settings-scale-type "Standard"
 
 az cognitiveservices account deployment create \
     --name $OPENAI_SERVICE \
     --resource-group $RESOURCE_GROUP \
-    --deployment-name gpt-4 \
-    --model-name gpt-4 \
-    --model-version "0613" \
+    --deployment-name chat-gpt-4o-mini \
+    --model-name gpt-4o-mini \
+    --model-version "1" \
     --model-format OpenAI \
     --scale-settings-scale-type "Standard"
 ```
@@ -113,8 +114,8 @@ az webapp config appsettings set \
         INDEX_NAME="docs-index" \
         OPENAI_ENDPOINT="$OPENAI_ENDPOINT" \
         OPENAI_KEY="$OPENAI_KEY" \
-        EMBEDDING_MODEL="text-embedding-ada-002" \
-        CHAT_MODEL="gpt-4"
+        EMBEDDING_MODEL="text-embedding-3-small" \
+        CHAT_MODEL="chat-gpt-4o-mini"
 
 # Deploy code
 cd /path/to/enterprise-ai-search
@@ -161,8 +162,8 @@ az container create \
         INDEX_NAME="docs-index" \
         OPENAI_ENDPOINT="$OPENAI_ENDPOINT" \
         OPENAI_KEY="$OPENAI_KEY" \
-        EMBEDDING_MODEL="text-embedding-ada-002" \
-        CHAT_MODEL="gpt-4" \
+        EMBEDDING_MODEL="text-embedding-3-small" \
+        CHAT_MODEL="chat-gpt-4o-mini" \
     --cpu 1 \
     --memory 1.5 \
     --restart-policy OnFailure
@@ -194,8 +195,8 @@ kubectl create secret generic enterprise-search-secrets \
     --from-literal=INDEX_NAME="docs-index" \
     --from-literal=OPENAI_ENDPOINT="$OPENAI_ENDPOINT" \
     --from-literal=OPENAI_KEY="$OPENAI_KEY" \
-    --from-literal=EMBEDDING_MODEL="text-embedding-ada-002" \
-    --from-literal=CHAT_MODEL="gpt-4"
+    --from-literal=EMBEDDING_MODEL="text-embedding-3-small" \
+    --from-literal=CHAT_MODEL="chat-gpt-4o-mini"
 
 # Apply deployment (see k8s/deployment.yaml)
 kubectl apply -f k8s/

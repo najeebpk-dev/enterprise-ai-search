@@ -22,7 +22,7 @@ PDF Documents → Text Extraction → Embedding Generation → Index Upload
 - Progress tracking with tqdm
 
 **Azure Resources Used**:
-- Azure OpenAI (text-embedding-ada-002)
+- Azure OpenAI (text-embedding-3-small)
 - Azure Cognitive Search (index management)
 
 ### 2. Query Interface (`src/query.py`)
@@ -42,7 +42,7 @@ User Query → Query Embedding → Hybrid Search → Context Retrieval → GPT A
 **RAG Implementation**:
 1. Retrieve top-k relevant documents (default: 5)
 2. Build context from retrieved content
-3. Generate answer using GPT-4 with context
+3. Generate answer using GPT-4o-mini (or your chat deployment) with context
 4. Provide source attribution
 
 ### 3. Configuration (`src/config.py`)
@@ -75,7 +75,7 @@ User Query → Query Embedding → Hybrid Search → Context Retrieval → GPT A
                 ┌──────────────────────┐
                 │ Generate Embeddings  │ (Azure OpenAI)
                 │   text-embedding-    │
-                │      ada-002         │
+                │     3-small          │
                 └──────────┬───────────┘
                            │
                            ▼
@@ -127,7 +127,7 @@ User Query → Query Embedding → Hybrid Search → Context Retrieval → GPT A
                         │
                         ▼
           ┌─────────────────────────────────┐
-          │  GPT-4 Answer Generation (RAG)  │
+            │  GPT-4o-mini Answer Generation (RAG)  │
           │  - System: Expert assistant     │
           │  - Context: Retrieved docs      │
           │  - Query: User question         │
@@ -157,7 +157,7 @@ User Query → Query Embedding → Hybrid Search → Context Retrieval → GPT A
 
 ### Embedding Model
 
-**text-embedding-ada-002**:
+**text-embedding-3-small**:
 - Dimension: 1536
 - Max tokens: ~8,191
 - Use case: General-purpose semantic understanding
@@ -205,7 +205,7 @@ User Query → Query Embedding → Hybrid Search → Context Retrieval → GPT A
 
 2. **Vertical Scaling**:
    - Increase Azure Search tier for more capacity
-   - Use GPT-4 Turbo for faster generation
+   - Use GPT-4o-mini for lower latency; upgrade to GPT-4o for higher quality
 
 3. **Optimization**:
    - Cache common queries
@@ -265,7 +265,7 @@ Track:
 ### Query Costs
 
 - **Embedding API**: ~$0.0001 per query
-- **GPT-4 API**: ~$0.03 per 1K prompt tokens, ~$0.06 per 1K completion
+- **GPT-4o-mini API**: see current Azure OpenAI pricing (typically lower than GPT-4o)
 - **Search Queries**: Depends on tier (free tier: 3/sec)
 
 ### Optimization Tips

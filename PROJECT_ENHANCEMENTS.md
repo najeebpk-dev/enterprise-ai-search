@@ -26,13 +26,13 @@ This document summarizes all improvements made to the Enterprise AI Search portf
 
 ### 1. RAG (Retrieval-Augmented Generation)
 - Implemented full RAG pipeline in `query.py`
-- GPT-4 powered intelligent answer generation
+- GPT-4o-mini powered intelligent answer generation
 - Context-aware responses with source attribution
 - Interactive query interface with formatted output
 
 ### 2. Vector Embeddings
 - Azure OpenAI integration for embedding generation
-- 1536-dimensional vectors (text-embedding-ada-002)
+- 1536-dimensional vectors (text-embedding-3-small)
 - Batch processing for efficient document upload
 - HNSW vector search configuration
 

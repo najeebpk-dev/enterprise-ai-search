@@ -83,7 +83,7 @@ def create_or_update_index(index_client: SearchIndexClient) -> None:
             name="embedding",
             type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
             searchable=True,
-            vector_search_dimensions=1536,  # text-embedding-ada-002 dimension
+            vector_search_dimensions=1536,  # text-embedding-3-small dimension
             vector_search_profile_name="vector-profile"
         ),
     ]
@@ -136,7 +136,7 @@ def generate_embedding(text: str, openai_client: AzureOpenAI) -> List[float]:
         List of floats representing the embedding vector
     """
     try:
-        # Truncate text if too long (max ~8000 tokens for ada-002)
+        # Truncate text if too long (max ~8000 tokens typical for embeddings)
         max_chars = 30000
         if len(text) > max_chars:
             text = text[:max_chars]

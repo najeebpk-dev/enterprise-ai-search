@@ -17,9 +17,9 @@ This portfolio project demonstrates production-ready AI search architecture, com
 
 ### 🎯 Core Capabilities
 - **📄 PDF Document Ingestion** - Automated pipeline for extracting and indexing PDF documents
-- **🧠 Vector Embeddings** - Semantic understanding using Azure OpenAI embeddings (text-embedding-ada-002)
+- **🧠 Vector Embeddings** - Semantic understanding using Azure OpenAI embeddings (text-embedding-3-small or your deployed embedding model)
 - **🔎 Hybrid Search** - Combines vector similarity and keyword search for optimal results
-- **💬 RAG-Powered Answers** - Intelligent answer generation using GPT-4 with retrieved context
+- **💬 RAG-Powered Answers** - Intelligent answer generation using GPT-4o-mini (or your chat model deployment) with retrieved context
 - **📊 Source Attribution** - Clear citations linking answers back to source documents
 
 ### ⚙️ Technical Features
@@ -58,8 +58,8 @@ enterprise-ai-search/
 - Azure subscription with:
   - [Azure Cognitive Search](https://azure.microsoft.com/services/search/) instance
   - [Azure OpenAI](https://azure.microsoft.com/products/ai-services/openai-service) resource with:
-    - `text-embedding-ada-002` deployment
-    - `gpt-4` or `gpt-4o` deployment
+    - `text-embedding-3-small` deployment (or your chosen embedding model name)
+    - `gpt-4o-mini` deployment (or your chosen chat model name)
 
 ### 1. Clone and Setup
 
@@ -101,8 +101,8 @@ INDEX_NAME=docs-index
 # Azure OpenAI
 OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 OPENAI_KEY=your-openai-api-key
-EMBEDDING_MODEL=text-embedding-ada-002
-CHAT_MODEL=gpt-4
+EMBEDDING_MODEL=text-embedding-3-small   # use your embedding deployment name
+CHAT_MODEL=gpt-4o-mini                   # use your chat deployment name
 ```
 
 ### 3. Add Documents
@@ -230,7 +230,7 @@ To configure network settings, follow these steps:
    - Converts user query to embedding vector
    - Performs hybrid search (vector + keyword)
    - Retrieves top-k most relevant document chunks
-   - Uses GPT-4 to generate contextual answer (RAG)
+  - Uses GPT-4o-mini to generate contextual answer (RAG)
    - Provides source attribution for transparency
 
 ---
@@ -240,8 +240,8 @@ To configure network settings, follow these steps:
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
 | **Search Engine** | Azure Cognitive Search | Vector + keyword indexing and retrieval |
-| **Embeddings** | Azure OpenAI (ada-002) | Semantic text understanding |
-| **LLM** | Azure OpenAI (GPT-4) | Answer generation (RAG) |
+| **Embeddings** | Azure OpenAI (text-embedding-3-small) | Semantic text understanding |
+| **LLM** | Azure OpenAI (GPT-4o-mini) | Answer generation (RAG) |
 | **Vector Algorithm** | HNSW | Fast approximate nearest neighbor search |
 | **PDF Processing** | pypdf | Text extraction from documents |
 | **Language** | Python 3.8+ | Core implementation |
@@ -260,7 +260,7 @@ To configure network settings, follow these steps:
   - `metric=cosine`: Distance metric for similarity
 
 ### Optimization Tips
-1. **Embedding Dimension**: 1536 (text-embedding-ada-002 standard)
+1. **Embedding Dimension**: 1536 (text-embedding-3-small standard)
 2. **Batch Size**: Default 50 documents per upload
 3. **Top-K Results**: Default 5 for optimal RAG context
 4. **Text Chunking**: Page-level granularity for accurate citations

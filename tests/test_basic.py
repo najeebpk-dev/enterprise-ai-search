@@ -20,8 +20,8 @@ class TestConfig:
         'INDEX_NAME': 'test-index',
         'OPENAI_ENDPOINT': 'https://test.openai.azure.com/',
         'OPENAI_KEY': 'test-openai-key',
-        'EMBEDDING_MODEL': 'text-embedding-ada-002',
-        'CHAT_MODEL': 'gpt-4'
+        'EMBEDDING_MODEL': 'text-embedding-3-small',
+        'CHAT_MODEL': 'gpt-4o-mini'
     })
     def test_config_loads_from_env(self):
         """Test that config loads environment variables correctly."""
@@ -29,7 +29,7 @@ class TestConfig:
         
         assert config.SEARCH_ENDPOINT == 'https://test.search.windows.net'
         assert config.INDEX_NAME == 'test-index'
-        assert config.EMBEDDING_MODEL == 'text-embedding-ada-002'
+        assert config.EMBEDDING_MODEL == 'text-embedding-3-small'
 
 
 class TestIngest:
@@ -56,7 +56,7 @@ class TestQuery:
     
     def test_embedding_dimension(self):
         """Test that embeddings have correct dimension."""
-        # text-embedding-ada-002 should produce 1536-dimensional vectors
+        # text-embedding-3-small should produce 1536-dimensional vectors
         expected_dimension = 1536
         
         # This would be tested with actual API call in integration tests

@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PDF document ingestion pipeline with vector embeddings
 - Azure Cognitive Search integration with HNSW algorithm
 - Hybrid search (vector + keyword) capabilities
-- RAG-powered answer generation using GPT-4
+- RAG-powered answer generation using GPT-4o-mini
 - Interactive CLI query interface
 - Comprehensive error handling and logging
 - Progress bars for long-running operations
@@ -23,8 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Features
 - Text extraction from PDF documents
-- Azure OpenAI embeddings (text-embedding-ada-002)
-- GPT-4 powered intelligent answers
+- Azure OpenAI embeddings (text-embedding-3-small)
+- GPT-4o-mini powered intelligent answers
 - Real-time search with context
 - Page-level document citations
 - Environment-based configuration
